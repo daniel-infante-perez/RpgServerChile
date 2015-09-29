@@ -111,15 +111,25 @@ class TiradorDados
                         $resultado->tiradaOk=false;
                         $resultado->mensajeError='Error de Sintaxis: ('. $partes[1].') no es un número';
                     }
-                    for($k=0;$k<$partes[0];$k++)
+                    elseif($rp>=intval($partes[1]))
                     {
-                        $tirada =rand(1,$partes[1]);
-                        while(($rp > 0)&&($tirada <= $rp))
+                        $resultado->tiradaOk=false;
+                        $resultado->mensajeError='Error de Semántica: No se puede tirar ('. $tokens[$j].')';
+                        $resultado->mensajeError.='Con un mínimo de ('.($rp+1).'), fijado por el parámetro Rp';
+
+                    }
+                    if($resultado->tiradaOk)
+                    {
+                        for($k=0;$k<$partes[0];$k++)
                         {
                             $tirada =rand(1,$partes[1]);
+                            while(($rp > 0)&&($tirada <= $rp))
+                            {
+                                $tirada =rand(1,$partes[1]);
+                            }
+                            array_push($tiradas,$tirada);
+                            $valor+= $tirada;
                         }
-                        array_push($tiradas,$tirada);
-                        $valor+= $tirada;
                     }
                 }
                 array_push($resultado->dados,$tiradas);
