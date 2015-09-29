@@ -1,4 +1,6 @@
 <?php
+
+$canal = $_REQUEST['channel'];
 //Options
 $token    = 'YOUR_TOKEN_HERE';
 $domain   = 'polerasrojas';
@@ -24,7 +26,7 @@ $attachments = array([
     )
 ]);
 $data = array(
-    'channel'     => $channel,
+    'channel'     => $canal,//$channel,
     'username'    => $bot_name,
     'text'        => $message,
     'icon_emoji'  => $icon,
