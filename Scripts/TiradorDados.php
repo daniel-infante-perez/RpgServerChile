@@ -12,6 +12,7 @@ class RespuestaDados
     public  $expresion;         // primitiva
     public  $numeroVeces;       // Nv
     public  $repetir;           // Rp
+    public  $frase;             // Frase de dado que se tiró
     public  $dados;             // Resultados de cada dado, array de enteros, multidimensional
     public  $suma;              // array de sumas de cada tirada de dados
     public  $tiradaOk;          // true|false
@@ -19,7 +20,37 @@ class RespuestaDados
 
    public function FormatoTexto()
     {
-
+        $resultado = '';
+        if(!$this->tiradaOk)
+        {
+            $resultado = 'Error en la tirada: ['.$this->mensajeError.']. Tirada original: '.$this->expresion;
+        }
+        else
+        {
+            if($this->numeroVeces!=1)
+            {
+                $resultado.='Se realizaron ['.$this->numeroVeces.'] tiradas.\r\n';
+            }
+            for($i=0; $i<count($this->dados);$i++)
+            {
+                if($this->numeroVeces!=1)
+                {
+                    $resultado.='Tirada #'.($i+1);
+                }
+                $resultado.= '['.$this->frase.']: [';
+                for($k=0;$k<count($this->dados[$i]);$k++)
+                {
+                    if($k!=0){ $resultado.=', '; }
+                    $resultado.=$this->dados[$i][$k];
+                }
+                $resultado.='] Suma=[' . $this->suma[$i] . ']';
+                if($this->repetir!=0)
+                {
+                    $resultado.='(Se repitieron resultados de '.$this->repetir.' o menos)';
+                }
+            }
+        }
+        return $resultado;
     }
 }
 
@@ -44,15 +75,16 @@ class TiradorDados
      */
     public function TirarDados($cad)
     {
+
         $cadena = str_replace('|',',',strtoupper($cad));
         $cadena = str_replace(';',',',$cadena);
         $cadena = str_replace(':',',',$cadena);
+        $cadena = str_replace(' ','+',$cadena);
         $nv=1;      // Número de veces a tirar
         $rp=0;      // Valor menor o igual al que repetir
         $frase='';  // Frase de tirada de dados a procesar
 
         $opciones = explode(',',$cadena);
-
         for($op=0; $op<count($opciones); $op++)
         {
             if(substr($opciones[$op],0,2)=='NV')
@@ -79,14 +111,16 @@ class TiradorDados
         $resultado->dados = array();
         $resultado->suma= array();
         $resultado->mensajeError='';
+        $resultado->frase = $frase;
 
         for($i=0;$i<$nv;$i++)
         {
             $valor = 0;
             $tiradas = array();
-            $toExplode = str_replace('-','+',$frase);
-            $tokens = explode('+',$toExplode);
 
+            $toExplode = str_replace('-','+',$resultado->frase);
+            $tokens = explode('+',$toExplode);
+            $suma=0; $fraseTrabajo = $resultado->frase; $operador = '+';
             for($j=0;$j<count($tokens);$j++)
             {
                 if(is_numeric($tokens[$j]))
@@ -131,16 +165,35 @@ class TiradorDados
                             $valor+= $tirada;
                         }
                     }
-                }
-                array_push($resultado->dados,$tiradas);
-                array_push($resultado->suma,$valor);
-            }
 
+                }
+                // valor del token determinado en $valor
+                if($operador=='+')
+                {
+                    $suma+=$valor;
+                }
+                else
+                {
+                    $suma-=$valor;
+                }
+                $fraseTrabajo = substr($fraseTrabajo,$tokens[$j],strlen($fraseTrabajo)-strlen($tokens[$j]));
+                if($fraseTrabajo!='')
+                {
+                    $operador = substr($fraseTrabajo,0,1);
+                    $fraseTrabajo = substr($fraseTrabajo,1,strlen($fraseTrabajo)-1);
+                }
+
+            }
+            array_push($resultado->dados,$tiradas);
+            array_push($resultado->suma,$suma);
         }
+
         return $resultado;
     }
 
 }
 $tirador = new TiradorDados();
-var_dump($tirador->TirarDados($_REQUEST['text']));
 
+echo $tirador->TirarDados($_REQUEST['text'])->FormatoTexto();
+
+?>
