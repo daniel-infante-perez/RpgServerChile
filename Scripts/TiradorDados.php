@@ -123,6 +123,7 @@ class TiradorDados
             $suma=0; $fraseTrabajo = $resultado->frase; $operador = '+';
             for($j=0;$j<count($tokens);$j++)
             {
+                $valor=0;
                 if(is_numeric($tokens[$j]))
                 {
                     $valor = $tokens[$j];
@@ -168,6 +169,7 @@ class TiradorDados
 
                 }
                 // valor del token determinado en $valor
+
                 if($operador=='+')
                 {
                     $suma+=$valor;
@@ -176,7 +178,8 @@ class TiradorDados
                 {
                     $suma-=$valor;
                 }
-                $fraseTrabajo = substr($fraseTrabajo,$tokens[$j],strlen($fraseTrabajo)-strlen($tokens[$j]));
+
+                $fraseTrabajo = substr($fraseTrabajo,strlen($tokens[$j]),strlen($fraseTrabajo)-strlen($tokens[$j]));
                 if($fraseTrabajo!='')
                 {
                     $operador = substr($fraseTrabajo,0,1);
