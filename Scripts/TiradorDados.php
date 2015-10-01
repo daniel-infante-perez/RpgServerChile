@@ -18,36 +18,44 @@ class RespuestaDados
     public  $tiradaOk;          // true|false
     public  $mensajeError;      // En caso de que haya habido un error
 
-   public function FormatoTexto()
+    /**
+     * @return string
+     */
+    public function FormatoTexto()
     {
-        $resultado = '';
+        $resultado = new array();
         if(!$this->tiradaOk)
         {
-            $resultado = 'Error en la tirada: ['.$this->mensajeError.']. Tirada original: '.$this->expresion;
+            //$resultado = 'Error en la tirada: ['.$this->mensajeError.']. Tirada original: '.$this->expresion;
+            array_push($resultado,'Error en la tirada: ['.$this->mensajeError.']. Tirada original: '.$this->expresion;)
         }
         else
         {
+
             if($this->numeroVeces!=1)
             {
-                $resultado.='Se realizaron ['.$this->numeroVeces.'] tiradas.<br/>';
+            //    $resultado.='Se realizaron ['.$this->numeroVeces.'] tiradas.<br/>';
+                array_push($resultado,'Se realizaron ['.$this->numeroVeces.'] tiradas.');
             }
-            for($i=0; $i<count($this->dados);$i++)
+            for($i=0; $i< count($this->dados);$i++)
             {
+                $parcial='';
                 if($this->numeroVeces!=1)
                 {
-                    $resultado.='Tirada #'.($i+1);
+                    $parcial.='Tirada #'.($i+1);
                 }
                 $resultado.= '['.$this->frase.']: [';
                 for($k=0;$k<count($this->dados[$i]);$k++)
                 {
                     if($k!=0){ $resultado.=', '; }
-                    $resultado.=$this->dados[$i][$k];
+                    $parcial.=$this->dados[$i][$k];
                 }
                 $resultado.='] Suma=[' . $this->suma[$i] . ']';
                 if($this->repetir!=0)
                 {
-                    $resultado.='(Se repitieron resultados de '.$this->repetir.' o menos)';
+                    $parcial.=' (Se repitieron resultados de '.$this->repetir.' o menos)';
                 }
+                array_push($resultado,$parcial);
             }
         }
         return $resultado;
