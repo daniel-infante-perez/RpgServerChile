@@ -51,7 +51,6 @@ class WebhookOutgoingData
         );
         return json_encode($data);
     }
-
     public function Actuar()
     {
         $respuesta = '';
@@ -62,30 +61,27 @@ class WebhookOutgoingData
         if($this->trigger_word==self::CMD_TIRO)
         {
             $tirador = new TiradorDados();
-            $respuesta = $tirador->TirarDados($this->frase_comando)->FormatoTexto();
+            $resultado = $tirador->TirarDados($this->frase_comando);
+            if($resultado->numeroVeces==1) {
+                $respuesta = $resultado->FormatoTexto();
+
+            }
+            else
+            {
+                $arrAtt=array();
+                $result = $resultado->FormatoAttachment();
+                $respuesta = $result['pretext'];
+                $result['pretext']='';
+                array_push($arrAtt, $result);
+                $attachments = $arrAtt;
+            }
+
         }
         else
         {
             $respuesta = 'Se ha producido un error: No se reconoce el comando ['.$this->trigger_word.']';
         }
-        $attachments = array();/*[
-            'fallback' => 'Lorem ipsum',
-            'pretext'  => 'Lorem ipsum',
-            'color'    => '#ff6600',
-            'fields'   => array(
-                [
-                    'title' => 'Title',
-                    'value' => 'Lorem ipsum',
-                    'short' => true
-                ],
-                [
-                    'title' => 'Notes',
-                    'value' => 'Lorem ipsum',
-                    'short' => true
-                ]
-            )
-        ]);
-    */
+
         return $this->Responder($bot_name,$respuesta,$icon,$attachments);
     }
 }

@@ -19,43 +19,111 @@ class RespuestaDados
     public  $mensajeError;      // En caso de que haya habido un error
 
     /**
+     * @param $i
+     * @return string
+     */
+    private function TiradaALinea($i)
+    {
+        $title = 'Tirada #' . ($i + 1);
+
+        $value = '[' . $this->frase . ']: [';
+        for ($k = 0; $k < count($this->dados[$i]); $k++) {
+            if ($k != 0) {
+                $value .= ', ';
+            }
+            $value .= $this->dados[$i][$k];
+        }
+        $value .= '] Suma=[' . $this->suma[$i] . ']';
+        if ($this->repetir != 0) {
+            $value .= ' (Se repitieron resultados de ' . $this->repetir . ' o menos)';
+        }
+        return array('title'=>$title,'value'=>$value,'short'=>true);
+
+
+    }
+    public function FormatoAttachment()
+    {
+        if($this->tiradaOk)
+        {
+            $resultado = array(
+                'fallback' => $this->FormatoTexto(),
+                'pretext' => 'Se realizaron [' . $this->numeroVeces . '] tiradas.',
+                'color' => '#ff6600',
+                'fields' => array()
+            );
+
+            for($i=0; $i< count($this->dados);$i++) {
+
+                array_push($resultado['fields'],$this->TiradaALinea($i));
+            }
+        }
+        else
+        {
+            $resultado = array(
+                'fallback' => 'Error en la tirada: ['.$this->mensajeError.']. Tirada original: '.$this->expresion,
+                'pretext' => 'Error en la tirada: ['.$this->mensajeError.']. Tirada original: '.$this->expresion,
+                'color' => '#ff6600',
+                'fields' => array()
+            );
+        }
+
+        return $resultado;
+       /* $attachments = array();
+       [
+            'fallback' => 'Lorem ipsum',
+            'pretext'  => 'Lorem ipsum',
+            'color'    => '#ff6600',
+            'fields'   => array(
+                [
+                    'title' => 'Title',
+                    'value' => 'Lorem ipsum',
+                    'short' => true
+                ],
+                [
+                    'title' => 'Notes',
+                    'value' => 'Lorem ipsum',
+                    'short' => true
+                ]
+            )
+        ]);
+    */
+
+    }
+    /**
      * @return string
      */
     public function FormatoTexto()
     {
-        $resultado = new array();
+        $resultado = '';
         if(!$this->tiradaOk)
         {
-            //$resultado = 'Error en la tirada: ['.$this->mensajeError.']. Tirada original: '.$this->expresion;
-            array_push($resultado,'Error en la tirada: ['.$this->mensajeError.']. Tirada original: '.$this->expresion;)
+            $resultado = 'Error en la tirada: ['.$this->mensajeError.']. Tirada original: '.$this->expresion;
         }
         else
         {
 
             if($this->numeroVeces!=1)
             {
-            //    $resultado.='Se realizaron ['.$this->numeroVeces.'] tiradas.<br/>';
-                array_push($resultado,'Se realizaron ['.$this->numeroVeces.'] tiradas.');
+                $resultado.='Se realizaron ['.$this->numeroVeces.'] tiradas. ';
             }
             for($i=0; $i< count($this->dados);$i++)
             {
-                $parcial='';
                 if($this->numeroVeces!=1)
                 {
-                    $parcial.='Tirada #'.($i+1);
+                    $resultado.='Tirada #'.($i+1);
                 }
-                $resultado.= '['.$this->frase.']: [';
+                $resultado.= ' ['.$this->frase.']: [';
                 for($k=0;$k<count($this->dados[$i]);$k++)
                 {
                     if($k!=0){ $resultado.=', '; }
-                    $parcial.=$this->dados[$i][$k];
+                    $resultado.=$this->dados[$i][$k];
                 }
                 $resultado.='] Suma=[' . $this->suma[$i] . ']';
                 if($this->repetir!=0)
                 {
-                    $parcial.=' (Se repitieron resultados de '.$this->repetir.' o menos)';
+                    $resultado.=' (Se repitieron resultados de '.$this->repetir.' o menos)';
                 }
-                array_push($resultado,$parcial);
+
             }
         }
         return $resultado;
