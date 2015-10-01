@@ -62,20 +62,9 @@ class WebhookOutgoingData
         {
             $tirador = new TiradorDados();
             $resultado = $tirador->TirarDados($this->frase_comando);
-            if($resultado->numeroVeces==1) {
-                $respuesta = $resultado->FormatoTexto();
-
-            }
-            else
-            {
-                $arrAtt=array();
-                $result = $resultado->FormatoAttachment();
-                $respuesta = $result['pretext'];
-                $result['pretext']='';
-                array_push($arrAtt, $result);
-                $attachments = $arrAtt;
-            }
-
+            $arr = $resultado->FormatoJsonWebhook();
+            $respuesta = $arr['respuesta'];
+            if($arr['attachments']!=null){ $attachments = $arr['attachments']; }
         }
         else
         {

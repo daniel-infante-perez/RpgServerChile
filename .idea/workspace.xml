@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/Scripts/TiradorDados.php" line="110" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/Scripts/TiradorDados.php" line="130" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="054ab3a9-e789-4676-a36f-2b9b3a275136" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scripts/SlackInterface.php" afterPath="$PROJECT_DIR$/Scripts/SlackInterface.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scripts/TiradorDados.php" afterPath="$PROJECT_DIR$/Scripts/TiradorDados.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="RpgServerChile.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,25 +28,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TiradorDados.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TiradorDados.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Scripts/TiradorDados.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="5.1923075">
-              <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.8521739">
+              <caret line="211" column="36" selection-start-line="211" selection-start-column="36" selection-end-line="211" selection-end-column="36" />
               <folding>
                 <element signature="e#7#110#0#PHP" expanded="true" />
-                <element signature="e#6255#8141#0#PHP" expanded="false" />
-                <element signature="e#6377#8141#0#PHP" expanded="false" />
+                <element signature="e#6914#8800#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SlackInterface.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SlackInterface.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Scripts/SlackInterface.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.045652173">
-              <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+            <state vertical-scroll-proportion="-7.230769">
+              <caret line="66" column="79" selection-start-line="66" selection-start-column="79" selection-end-line="66" selection-end-column="79" />
               <folding />
             </state>
           </provider>
@@ -66,8 +63,8 @@
         <option value="$PROJECT_DIR$/Scripts/json.php" />
         <option value="$PROJECT_DIR$/Scripts/json2.php" />
         <option value="$PROJECT_DIR$/Scripts/TiradorDados2.php" />
-        <option value="$PROJECT_DIR$/Scripts/TiradorDados.php" />
         <option value="$PROJECT_DIR$/Scripts/SlackInterface.php" />
+        <option value="$PROJECT_DIR$/Scripts/TiradorDados.php" />
       </list>
     </option>
   </component>
@@ -282,8 +279,7 @@
           <caret line="44" column="19" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
           <folding>
             <element signature="e#7#110#0#PHP" expanded="true" />
-            <element signature="e#6255#8141#0#PHP" expanded="false" />
-            <element signature="e#6377#8141#0#PHP" expanded="false" />
+            <element signature="e#6914#8800#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -316,8 +312,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#7#110#0#PHP" expanded="true" />
-            <element signature="e#6255#8141#0#PHP" expanded="false" />
-            <element signature="e#6377#8141#0#PHP" expanded="false" />
+            <element signature="e#6914#8800#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -326,6 +321,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -373,8 +369,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#7#110#0#PHP" expanded="true" />
-            <element signature="e#6255#8141#0#PHP" expanded="false" />
-            <element signature="e#6377#8141#0#PHP" expanded="false" />
+            <element signature="e#6914#8800#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -397,6 +392,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -424,23 +420,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/TiradorDados.php">
+    <entry file="file://$PROJECT_DIR$/Scripts/SlackInterface.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="5.1923075">
-          <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
-          <folding>
-            <element signature="e#7#110#0#PHP" expanded="true" />
-            <element signature="e#6255#8141#0#PHP" expanded="false" />
-            <element signature="e#6377#8141#0#PHP" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="-7.230769">
+          <caret line="66" column="79" selection-start-line="66" selection-start-column="79" selection-end-line="66" selection-end-column="79" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Scripts/SlackInterface.php">
+    <entry file="file://$PROJECT_DIR$/Scripts/TiradorDados.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.045652173">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.8521739">
+          <caret line="211" column="36" selection-start-line="211" selection-start-column="36" selection-end-line="211" selection-end-column="36" />
+          <folding>
+            <element signature="e#7#110#0#PHP" expanded="true" />
+            <element signature="e#6914#8800#0#PHP" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

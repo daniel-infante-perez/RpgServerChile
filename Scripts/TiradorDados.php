@@ -18,11 +18,31 @@ class RespuestaDados
     public  $tiradaOk;          // true|false
     public  $mensajeError;      // En caso de que haya habido un error
 
+
+    public function FormatoJsonWebhook()
+    {
+
+        $respuesta = array('respuesta'=>'', 'attachments'=>null);
+        if($this->numeroVeces==1) {
+            $respuesta['respuesta'] = $this->FormatoTexto();
+        }
+        else
+        {
+            $arrAtt=array();
+            $result = $this->FormatoAttachment();
+            $respuesta['respuesta'] = $result['pretext'];
+            $result['pretext']='';
+            array_push($arrAtt, $result);
+            $respuesta['attachments'] = $arrAtt;
+        }
+        return $respuesta;
+
+    }
     /**
      * @param $i
      * @return string
      */
-    private function TiradaALinea($i)
+    protected function TiradaALinea($i)
     {
         $title = 'Tirada #' . ($i + 1);
 
@@ -41,7 +61,7 @@ class RespuestaDados
 
 
     }
-    public function FormatoAttachment()
+    protected function FormatoAttachment()
     {
         if($this->tiradaOk)
         {
@@ -92,7 +112,7 @@ class RespuestaDados
     /**
      * @return string
      */
-    public function FormatoTexto()
+    protected function FormatoTexto()
     {
         $resultado = '';
         if(!$this->tiradaOk)
@@ -156,14 +176,17 @@ class TiradorDados
         $cadena = str_replace('|',',',strtoupper($cad));
         $cadena = str_replace(';',',',$cadena);
         $cadena = str_replace(':',',',$cadena);
+        $cadena = str_replace(' ','',$cadena);
         $cadena = str_replace(' ','+',$cadena);
         $nv=1;      // Número de veces a tirar
         $rp=0;      // Valor menor o igual al que repetir
         $frase='';  // Frase de tirada de dados a procesar
 
+
         $opciones = explode(',',$cadena);
         for($op=0; $op<count($opciones); $op++)
         {
+            $opciones[$op]=trim($opciones[$op]);
             if(substr($opciones[$op],0,2)=='NV')
             {
                 $nv = intval(str_replace('NV=','',$opciones[$op]));
@@ -179,7 +202,6 @@ class TiradorDados
                 }
         }
 
-
         $resultado = new RespuestaDados();
         $resultado->expresion = $cad;
         $resultado->numeroVeces = $nv;
@@ -190,12 +212,15 @@ class TiradorDados
         $resultado->mensajeError='';
         $resultado->frase = $frase;
 
+
+
         for($i=0;$i<$nv;$i++)
         {
             $valor = 0;
             $tiradas = array();
 
             $toExplode = str_replace('-','+',$resultado->frase);
+
             $tokens = explode('+',$toExplode);
             $suma=0; $fraseTrabajo = $resultado->frase; $operador = '+';
             for($j=0;$j<count($tokens);$j++)
