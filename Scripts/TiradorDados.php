@@ -29,7 +29,7 @@ class RespuestaDados
         {
             if($this->numeroVeces!=1)
             {
-                $resultado.='Se realizaron ['.$this->numeroVeces.'] tiradas.\r\n';
+                $resultado.='Se realizaron ['.$this->numeroVeces.'] tiradas.<br/>';
             }
             for($i=0; $i<count($this->dados);$i++)
             {
@@ -58,7 +58,9 @@ class RespuestaDados
 class TiradorDados
 {
     /**
-     * @param $cadena: texto especificando la tirada. Sintaxis:
+     * @param $cad
+     * @return RespuestaDados
+     * @internal param $cadena : texto especificando la tirada. Sintaxis:
      *      $cadena     := [opciones]*fraseTirada
      *      opciones    := opcion separador
      *      separador   := ;
@@ -71,7 +73,6 @@ class TiradorDados
      *                     digito D digito
      *                     fraseTirada + fraseTirada
      *                     fraseTirada - fraseTirada
-     * @return RespuestaDados
      */
     public function TirarDados($cad)
     {
@@ -195,8 +196,10 @@ class TiradorDados
     }
 
 }
+/*
 $tirador = new TiradorDados();
 
 echo $tirador->TirarDados($_REQUEST['text'])->FormatoTexto();
 
 ?>
+*/
