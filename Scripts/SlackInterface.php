@@ -75,5 +75,7 @@ class WebhookOutgoingData
     }
 }
 
+
 $webHook = new WebhookOutgoingData($_REQUEST);
+header('Content-Type: application/json');
 echo $webHook->Actuar();

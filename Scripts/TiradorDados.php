@@ -143,7 +143,7 @@ class RespuestaDados
                 {
                     $resultado.=' (Se repitieron resultados de '.$this->repetir.' o menos)';
                 }
-
+                $resultado.=' ';
             }
         }
         return $resultado;
